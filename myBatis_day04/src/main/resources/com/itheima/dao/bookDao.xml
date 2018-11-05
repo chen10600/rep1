@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itheima.dao.bookDao">
+
+    <!--<resultMap id="kindMap" type="kind">
+    <result column="kind_name" property="kind_name"></result>
+    <collection property="list" ofType="book">
+        <result column="bookname" property="bookname"></result>
+    </collection>
+    </resultMap>
+    <select id="findByKind" resultMap="kindMap">
+      SELECT bookname,kind_name FROM book b,kind k WHERE b.kind_id=k.id
+    </select>-->
+
+    <!-- <resultMap id="bookMap" type="book">
+
+    </resultMap>
+    <select id="findByPrice" resultMap="bookMap" >
+        SELECT * FROM book
+        <where>
+            AND price &lt;#{price}
+        </where>
+    </select>
+       <![CDATA[ ]]>    -->
+    <!--多对一查询-->
+    <resultMap id="infoMap" type="Total">
+        <result column="bookname" property="book.bookname"></result>
+        <result column="price" property="book.price"></result>
+        <result column="total" property="num"></result>
+    </resultMap>
+    <select id="findByInfo" resultMap="infoMap">
+        SELECT bookname,price,nums,(nums*price) as total FROM book b,saleinfo s WHERE b.id=s.bookid
+    </select>
+    </mapper>
